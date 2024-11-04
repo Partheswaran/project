@@ -1,64 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Counter App</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
-        }
-        .counter {
-            text-align: center;
-            padding: 20px;
-            border: 2px solid #333;
-            border-radius: 10px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .button {
-            margin: 5px;
-            padding: 10px 15px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            background-color: #007BFF;
-            color: white;
-        }
-        .button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <title>Counter App</title>
+    <style>* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container h1 {
+    margin: 30px;
+}
+
+.counter {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+}
+
+#increment-btn,
+#decrement-btn,
+#reset {
+    height: 50px;
+    width: 120px;
+    padding: 0 40px;
+    border-radius: 10px;
+    font-size: 40px;
+    background-color: #2e8d46;
+    border: 2px solid #2e8d46;
+    color: white;
+    margin: 20px;
+}
+
+#reset {
+    font-size: 20px;
+}
+
+#counter-value {
+    height: 50px;
+    min-width: 120px;
+    border-radius: 10px;
+    background-color: rgba(255, 0, 0, 0.187);
+    margin-top: 20px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+</style>
 </head>
+
 <body>
-    <div id="root"></div>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
-    
-    <script>
-        const { useState } = React;
+    <div class="container">
+        <h1>Counter App</h1>
+        <div class="counter">
+            <button id="increment-btn">+</button>
+            <div id="counter-value">0</div>
+            <button id="decrement-btn">-</button>
+        </div>
+        <button id="reset">Reset</button>
+    </div>
 
-        function Counter() {
-            const [count, setCount] = useState(0);
+    <script>let counter = 0;
 
-            return (
-                <div className="counter">
-                    <h1>{count}</h1>
-                    <button className="button" onClick={() => setCount(count + 1)}>Increment</button>
-                    <button className="button" onClick={() => setCount(count - 1)}>Decrement</button>
-                    <button className="button" onClick={() => setCount(0)}>Reset</button>
-                </div>
-            );
-        }
+const counterValue = document.getElementById('counter-value');
+const incrementBtn = document.getElementById('increment-btn');
+const decrementBtn = document.getElementById('decrement-btn');
+const resetBtn = document.querySelector('#reset');
 
-        ReactDOM.render(<Counter />, document.getElementById('root'));
-    </script>
+// To increment the value of counter
+incrementBtn.addEventListener('click', () => {
+    counter++;
+    counterValue.innerHTML = counter;
+});
+
+// To decrement the value of counter
+decrementBtn.addEventListener('click', () => {
+    counter--;
+    counterValue.innerHTML = counter;
+});
+
+// To reset the counter to zero
+resetBtn.addEventListener('click', reset);
+
+function reset() {
+    counter = 0;
+    counterValue.innerHTML = counter;
+}
+</script>
 </body>
+
 </html>
